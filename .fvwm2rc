@@ -109,7 +109,7 @@ Style "QuitVerify"		!Title, HilightColorset 1
 Style "LaunchPanel"		Sticky, WindowListSkip, !Title, BorderWidth 0, !Handles, NeverFocus
 Style "FvwmIdent"		!Title, HilightColorset 1
 Style "Ubutton"			Sticky, WindowListSkip, !Title, !Borders, !Handles, Layer 0
-Style "UpRightPanel"	Sticky, WindowListSkip, NeverFocus, !Title, !Borders, !Handles
+Style "TopPanel"		Sticky, WindowListSkip, NeverFocus, !Title, !Borders, !Handles
 
 # Styles for a couple of common apps
 Style "Firefox"			Icon "gnome/32x32/apps/web-browser.png", IconOverride
@@ -171,9 +171,9 @@ AddToMenu "Window"
 + "(Un)Stick"				Stick
 + "(Un)Maximize"			Maximize 100 100
 + ""			      		Nop
-+ "Send to workspace..."    PopUp ToDesk
-+ ""                        Nop
-+ "&Close"                  Delete
++ "Send to workspace..."	PopUp ToDesk
++ ""						Nop
++ "&Close"					Delete
 
 
 
@@ -182,7 +182,7 @@ AddToMenu "Window"
 #==========
 DestroyFunc "StartFunction"
 AddToFunc "StartFunction"
-+	"I" Module FvwmButtons UpRightPanel
++	"I" Module FvwmButtons TopPanel
 +	"I" Module FvwmBacker
 +	"I" Module FvwmCommandS
 +	"I" Module FvwmAnimate
@@ -191,30 +191,30 @@ AddToFunc "StartFunction"
 
 DestroyFunc "Move-or-Lower" 
 AddToFunc "Move-or-Lower" "M" Move
-+              	"M" Lower
-+              	"C" Lower
-+              	"D" RaiseLower
++				"M" Lower
++				"C" Lower
++				"D" RaiseLower
 
 DestroyFunc "Move-or-Iconify" 
 AddToFunc "Move-or-Iconify" "M" Move
-+              	"C" Iconify
-+              	"D" Iconify
++				"C" Iconify
++				"D" Iconify
 
 DestroyFunc "windowops-or-die" 
 AddToFunc "windowops-or-die" "M" Popup "Window" nop
-+              	"C" Popup "Window" nop
-+              	"D" Close
++				"C" Popup "Window" nop
++				"D" Close
 
 DestroyFunc "Move-or-Raise" 
 AddToFunc "Move-or-Raise" "M" Raise
-+              	"M" Move
-+              	"C" Raise
-+              	"D" WindowShade
++				"M" Move
++				"C" Raise
++				"D" WindowShade
 
 DestroyFunc "Resize-or-Raise" 
 AddToFunc "Resize-or-Raise" "M" Resize
-+              	"M" Raise
-+              	"C" Raise
++				"M" Raise
++				"C" Raise
 +				"D" RaiseLower
 
 DestroyFunc "RaiseFocus"	
@@ -234,14 +234,14 @@ AddToFunc  "PrevWindow"
 
 DestroyFunc "UnclutterWindows"
 AddToFunc "UnclutterWindows"
-+	"I"	All ( Currentdesk !iconic !sticky !maximized ) WindowStyle MinOverLapPlacement
-+	"I"	All ( Currentdesk !iconic !sticky !maximized ) PlaceAgain
-+	"I"	All ( Currentdesk !iconic !sticky !maximized ) DestroyWindowStyle
++	"I"		All ( Currentdesk !iconic !sticky !maximized ) WindowStyle MinOverLapPlacement
++	"I"		All ( Currentdesk !iconic !sticky !maximized ) PlaceAgain
++	"I"		( Currentdesk !iconic !sticky !maximized ) DestroyWindowStyle
 
 DestroyFunc "ArrangeIcons"
 AddToFunc "ArrangeIcons"
-+ 	"I"     All ( CurrentDesk, Iconic ) PlaceAgain Icon
-+	"I"     All ( CurrentDesk, Iconic ) WindowStyle IconBackgroundColorset 5
++ 	"I"		All ( CurrentDesk, Iconic ) PlaceAgain Icon
++	"I"		All ( CurrentDesk, Iconic ) WindowStyle IconBackgroundColorset 5
 
 
 #=======================
@@ -325,22 +325,22 @@ DestroyModuleConfig FvwmIdent: *
 *FvwmIdent: Colorset 4
 *FvwmIdent: Font $[normal_font]
 
-*UpRightPanel: ButtonGeometry $[vp.width]x18+0+0
-*UpRightPanel: Font $[normal_font]
-*UpRightPanel: Colorset 20
-*UpRightPanel: Frame 0
-*UpRightPanel: Padding 0 0
-*UpRightPanel: (Container(Rows 1, Columns 8))
-*UpRightPanel: (Title "System", Action Popup Root Rectangle +$left+20 0 0m) 
-*UpRightPanel: (Title "Tools", Action Popup Tools_apps Rectangle +$left+20 0 0m) 
-*UpRightPanel: (Title "Network", Action Popup Net_apps Rectangle +$left+20 0 0m) 
-*UpRightPanel: (Title "Graphx", Action Popup Gfx_apps Rectangle +$left+20 0 0m)
-*UpRightPanel: (Title "Music", Action Popup Mus_apps Rectangle +$left+20 0 0m)
-*UpRightPanel: (Title "Games", Action Popup Game_apps Rectangle +$left+20 0 0m)
-*UpRightPanel: (Size 16 Title " ")
-*UpRightPanel: (right, Frame 0, Swallow (UseOld, NoClose) "PanelClock" "Exec exec xclock -bg $[bg.cs20] -padding 2")
-*UpRightPanel: (right, Icon "titlebar_gadget.png" , Action WindowList $[winlist_ops])
-*UpRightPanel: (End)
+*TopPanel: ButtonGeometry $[vp.width]x18+0+0
+*TopPanel: Font $[normal_font]
+*TopPanel: Colorset 20
+*TopPanel: Frame 0
+*TopPanel: Padding 0 0
+*TopPanel: (Container(Rows 1, Columns 8))
+*TopPanel: (Title "System", Action Popup Root Rectangle +$left+20 0 0m) 
+*TopPanel: (Title "Tools", Action Popup Tools_apps Rectangle +$left+20 0 0m) 
+*TopPanel: (Title "Network", Action Popup Net_apps Rectangle +$left+20 0 0m) 
+*TopPanel: (Title "Graphx", Action Popup Gfx_apps Rectangle +$left+20 0 0m)
+*TopPanel: (Title "Music", Action Popup Mus_apps Rectangle +$left+20 0 0m)
+*TopPanel: (Title "Games", Action Popup Game_apps Rectangle +$left+20 0 0m)
+*TopPanel: (Size 16 Title " ")
+*TopPanel: (right, Frame 0, Swallow (UseOld, NoClose) "PanelClock" "Exec exec xclock -bg $[bg.cs20] -padding 2")
+*TopPanel: (right, Icon "titlebar_gadget.png" , Action WindowList $[winlist_ops])
+*TopPanel: (End)
 
 
 # check: Icon, IconOverride (pour mettre des icons custom) "they are Styles"
