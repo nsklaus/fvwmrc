@@ -1,0 +1,349 @@
+
+#=================
+# Environment vars
+#=================
+SetEnv wallpaper "$[FVWM_USERDIR]/backdrops/shad.png"
+SetEnv fvwm_tmp "/tmp"
+SetEnv fvwm_scriptdir "$[FVWM_USERDIR]/scripts"
+setenv XDG_CONFIG_DIRS "/usr/local/etc/xdg"
+
+# Fonts - you may need to adjust the sizes.
+SetEnv 	normal_font "xft:Monospace:bold:size=8"
+SetEnv 	icon_font "xft:Monospace:bold:size=8"
+SetEnv 	window_font "xft:Monospace:bold:size=8"
+
+# Options given to the built-in window list
+SetEnv winlist_ops "SortByClass OnTop NoGeometry NoCurrentDeskTitle NoNumInDeskTitle TitleForAllDesks MaxLabelWidth 25 nohotkeys NoDeskNum IconifiedAtEnd"
+
+#============
+# Basic Setup
+#============
+ImagePath	$[icontheme]:/usr/share/icons:/usr/share/fvwm/images:/usr/X11R6/share/icons:/usr/X11R6/share/fvwm/images/
+
+DefaultFont "$[normal_font]"
+CursorStyle DEFAULT left_ptr
+CursorStyle MENU right_ptr
+CursorStyle TITLE left_ptr
+CursorStyle ROOT left_ptr
+HideGeometryWindow
+
+BugOpts RaiseOverUnmanaged
+BugOpts FlickeringMoveWorkaround
+BugOpts FlickeringQtDialogsWorkaround
+
+# See http://www.fvwm.org/documentation/faq/#5.5
+IgnoreModifiers L2
+DeskTopSize 		1x1
+Emulate MWM
+ClickTime
+DefaultColorset 1
+OpaqueMoveSize 		1000
+
+#======================
+# Colourset definitions
+#======================
+CleanupColorsets
+
+# Default colourset, used for inactive windows, etc.
+#Colorset 1 fg black, bg gray75, fgsh $[hilight.cs1]
+
+# Colourset for active windows
+Colorset 2 fg White, bg slategray4, fgsh $[shadow.cs2]
+
+# Menus
+# ColorSet 4 fg $[fg.cs1] bg $[bg.cs1], fgsh $[hilight.cs1], Dgradient 128 3 $[bg.cs1] 1000 $[bg.cs1] 1 $[bg.cs1] 1000 $[bg.cs2], Dither
+
+# Colorset 5 Transparent, fg $[shadow.cs1], fgsh $[hilight.cs1]
+
+#Desktop background
+# Colorset 15 bg #415d5a, fg white, Dgradient 256 black $[hilight.cs2]
+# Test (f $[wallpaper]) Colorset 15 Pixmap $[wallpaper]
+
+#Icon backgrounds
+Colorset 5 RootTransparent
+Colorset 20 fg black, bg white
+
+
+#=======================
+# Menu and window styles
+#=======================
+MenuStyle "*"			Win, MenuColorset 20, TitleColorset 20
+MenuStyle "*"			Hilight3DThickness -1
+MenuStyle "*"			SeparatorsLong, BorderWidth 1, VerticalItemSpacing 2
+MenuStyle "*"			Font $[normal_font]
+MenuStyle "*"			TitleFont Font $[normal_font]
+MenuStyle "*"			GreyedColorset 5
+
+# Styles applying to all windows
+Style "*"				IconSize 64 50 64 50, IconBackgroundColorset 5, IconBackgroundrelief 0, Icontitlerelief 0, HilightIconTitleColorset 2
+Style "*"				EWMHDonateIcon, EWMHDonateMiniIcon
+Style "*"				IconBox $[vp.width]x$[vp.height]+0-0, IconFill left bottom, IconSize 64 32 64 32
+Style "*" 				TileCascadePlacement 
+Style "*"				Font $[normal_font]
+
+# Uncomment one of the 3 following for your preferred focus model
+Style "*"            	ClickToFocus
+Style "*"				FPGrabFocus, SkipMapping
+#Style "*"	     		MWMBorder, FirmBorder
+Style "*"     	     	MWMButtons
+Style "*"            	MWMFunctions
+#Style "*" 				WindowShadeShrinks
+Style "*"				WindowShadeSteps 16 
+Style "*"				Colorset 1, IconTitleColorset 1
+Style "*"				IconFont Font $[normal_font]
+Style "*"				HilightColorSet 2
+Style "*"            	DecorateTransient
+Style "*"				EWMHUseStrutHints
+Style "*"				UseDecor "DefaultDecor"
+# A nice 3d bevel around windows
+Style "*"				BorderWidth 4 
+Style "*"				HandleWidth 4 
+# Default icon.
+#Style "*"				Icon "emblems/emblem-system.svg:48x48"
+#Style "*"				MiniIcon "emblems/emblem-system.svg:16x16"
+#Style "*"				!Button 2
+#Style "*"				SnapAttraction 8 All
+
+# Styles for fvwm modules
+Style "QuitVerify"		!Title, HilightColorset 1
+Style "LaunchPanel"		Sticky, WindowListSkip, !Title, BorderWidth 0, !Handles, NeverFocus
+Style "FvwmIdent"		!Title, HilightColorset 1
+Style "Ubutton"			Sticky, WindowListSkip, !Title, !Borders, !Handles, Layer 0
+Style "UpRightPanel"	Sticky, WindowListSkip, NeverFocus, !Title, !Borders, !Handles
+
+# Styles for a couple of common apps
+Style "Firefox"			Icon "gnome/32x32/apps/web-browser.png", IconOverride
+Style "Gnome-terminal"	Icon "gnome/32x32/apps/terminal.png", IconOverride
+Style "Transmission"	StartsOnDesk 0
+Style "Pidgin"			Icon "hicolor/32x32/apps/pidgin.png", IconOverride
+Style "Worker"			Icon "gnome/32x32/devices/system-floppy.png", MiniIcon "gnome/16x16/devices/system-floppy.png"
+Style "Pcmanfm"			Icon "gnome/32x32/apps/kfm.png"
+Style "hexchat"			Icon "gnome-colors-common/32x32/apps/xchat-gnome.png", IconOverride
+
+#=========
+# Menus
+#=========
+
+DestroyMenu Tools_apps
+AddToMenu Tools_apps
++	"Terminal emu"			Exec exec "gnome-terminal"
++	"File Manager"			Exec exec "worker"
++	"Text Editor"			Exec exec "geany"
+
+DestroyMenu Net_apps
+AddToMenu Net_apps
++	"Web Browser"			Exec exec "firefox"
++	"IRC client"			Exec exec "hexchat"
++	"Pidgin chat"			Exec exec "pidgin"
+
+DestroyMenu Gfx_apps
+AddToMenu Gfx_apps
++	"Gimp pix edit"			Exec exec "gimp"
+
+
+DestroyMenu Mus_apps
+AddToMenu Mus_apps
++	"VideoLanClient"		Exec exec "vlc"
+
+DestroyMenu Game_apps
+AddToMenu Game_apps
++	"Goban kgs"				Exec exec "java -jar ~/Downloads/cgoban.jar"
+
+DestroyMenu "Root"
+AddToMenu "Root"
++   "XLock"     			Exec exec dm-tool lock
++	""						Nop
++	"Iconify All"			All ( CurrentDesk !Sticky) Iconify on
++	"Unclutter Windows"		Function UnclutterWindows
++	"Pack Icons"			Function "ArrangeIcons"	
++	"Refresh"  				Refresh 
++	""						Nop
++	"Restart FVWM"			Restart
++	""						Nop
++	"Log out"				Module FvwmForm QuitVerify
+
+AddToMenu "Window" 
++ "&Move"					Move
++ "&Resize"             	Resize
++ "(De)&Iconify"			Iconify
++ "Iconify &program"		Current All ( CurrentDesk $[w.resource] ) Iconify On
++ "Iconify all others"		All ( CurrentDesk !Focused !Sticky) Iconify on
++ "(Un)Stick"				Stick
++ "(Un)Maximize"			Maximize 100 100
++ ""			      		Nop
++ "Send to workspace..."    PopUp ToDesk
++ ""                        Nop
++ "&Close"                  Delete
+
+
+
+#==========
+# Functions
+#==========
+DestroyFunc "StartFunction"
+AddToFunc "StartFunction"
++	"I" Module FvwmButtons UpRightPanel
++	"I" Module FvwmBacker
++	"I" Module FvwmCommandS
++	"I" Module FvwmAnimate
++	"I" Test (Init) GoToDesk 0 0
+
+
+DestroyFunc "Move-or-Lower" 
+AddToFunc "Move-or-Lower" "M" Move
++              	"M" Lower
++              	"C" Lower
++              	"D" RaiseLower
+
+DestroyFunc "Move-or-Iconify" 
+AddToFunc "Move-or-Iconify" "M" Move
++              	"C" Iconify
++              	"D" Iconify
+
+DestroyFunc "windowops-or-die" 
+AddToFunc "windowops-or-die" "M" Popup "Window" nop
++              	"C" Popup "Window" nop
++              	"D" Close
+
+DestroyFunc "Move-or-Raise" 
+AddToFunc "Move-or-Raise" "M" Raise
++              	"M" Move
++              	"C" Raise
++              	"D" WindowShade
+
+DestroyFunc "Resize-or-Raise" 
+AddToFunc "Resize-or-Raise" "M" Resize
++              	"M" Raise
++              	"C" Raise
++				"D" RaiseLower
+
+DestroyFunc "RaiseFocus"	
+AddToFunc "RaiseFocus"	"I" Iconify Off
++				"I"		Raise
++				"I" 	Focus
+
+DestroyFunc "NextWindow"
+AddToFunc  "NextWindow"  
++ I Next (!Iconic CurrentPage AcceptsFocus) Focus
++ I Current Raise
+
+DestroyFunc "PrevWindow"
+AddToFunc  "PrevWindow"
++ I Prev (!Iconic CurrentPage AcceptsFocus) Focus
++ I Current Raise
+
+DestroyFunc "UnclutterWindows"
+AddToFunc "UnclutterWindows"
++	"I"	All ( Currentdesk !iconic !sticky !maximized ) WindowStyle MinOverLapPlacement
++	"I"	All ( Currentdesk !iconic !sticky !maximized ) PlaceAgain
++	"I"	All ( Currentdesk !iconic !sticky !maximized ) DestroyWindowStyle
+
+DestroyFunc "ArrangeIcons"
+AddToFunc "ArrangeIcons"
++ 	"I"     All ( CurrentDesk, Iconic ) PlaceAgain Icon
++	"I"     All ( CurrentDesk, Iconic ) WindowStyle IconBackgroundColorset 5
+
+
+#=======================
+# Mouse-and Key Bindings
+#=======================
+# Button	Context	Modifi	Function
+Mouse 3		R       C	Menu "fvwm" Nop
+
+# This removes the built-in fvwm root menu
+Mouse 1		R		A   Nop
+Mouse 1		1		A   Close
+Mouse 2		1		A   WindowList ( $[w.class] ) $[winlist_ops]
+Mouse 0		6       A   Iconify
+Mouse 0		4       A   Maximize
+Mouse 1		2		A   WindowShade
+Mouse 1		FS      A   Resize-or-Raise
+Mouse 1		T       A   Move-or-Raise
+Mouse 1		I       A   Move-or-Iconify
+Mouse 2		I       A   Iconify
+Mouse 3		TSIF    A   PopUp "Window"
+Mouse 2		W       C   Resize-or-Raise
+Mouse 1		W       M   Move-or-Raise
+Mouse 2		T		A   Move-or-Lower
+
+
+# You can switch between windows with shift+alt+arrow keys
+Key Left	A	SM	Direction West (CurrentDesk AcceptsFocus) RaiseFocus
+Key Right	A	SM	Direction East (CurrentDesk AcceptsFocus) RaiseFocus
+Key Up		A	SM	Direction North (CurrentDesk AcceptsFocus) RaiseFocus
+Key Down	A	SM	Direction South (CurrentDesk AcceptsFocus) RaiseFocus
+
+# Control+Alt+Up/Down arrows will shade and unshade the active window
+Key Down	A	CM	WindowShade Off
+Key Up		A	CM	WindowShade On
+
+# Alt+Tab functionality
+Key Tab		A	M	Function NextWindow
+Key Tab		A	SM	Function PrevWindow
+
+# Ctrl+Esc gives the window list
+Key Escape	A	C	WindowList $[winlist_ops]
+
+# Toggle music
+Key Pause	A	N	Exec exec cmus-remote --pause
+
+#=========
+# Modules 
+#=========
+# This sets the backdrop
+DestroyModuleConfig FvwmBacker: *
+*FvwmBacker: RetainPixmap
+*FvwmBacker: Command Colorset 15
+
+
+# FvwmForm alias - query exit ala mwm
+DestroyModuleConfig QuitVerify: *
+*QuitVerify: Font $[normal_font]
+*QuitVerify: ButtonFont $[normal_font]
+*QuitVerify: Colorset 4
+*QuitVerify: ItemColorset 4
+*QuitVerify: GrabServer
+*QuitVerify: WarpPointer
+*QuitVerify: Line          center
+*QuitVerify: Text          "     Quit FVWM?     "
+*QuitVerify: Line          expand
+*QuitVerify: Line          expand
+*QuitVerify: Line          center
+*QuitVerify: Button   quit      "  Ok  "
+*QuitVerify: Command  Quit
+*QuitVerify: Button   quit      "Cancel"
+*QuitVerify: Command  Nop
+
+
+DestroyModuleConfig FvwmAnimate: *
+*FvwmAnimate: Effect Flip
+*FvwmAnimate: Iterations 24
+*FvwmAnimate: Delay 3
+*FvwmAnimate: Width 3
+
+DestroyModuleConfig FvwmIdent: *
+*FvwmIdent: Colorset 4
+*FvwmIdent: Font $[normal_font]
+
+*UpRightPanel: ButtonGeometry $[vp.width]x18+0+0
+*UpRightPanel: Font $[normal_font]
+*UpRightPanel: Colorset 20
+*UpRightPanel: Frame 0
+*UpRightPanel: Padding 0 0
+*UpRightPanel: (Container(Rows 1, Columns 8))
+*UpRightPanel: (Title "System", Action Popup Root Rectangle +$left+20 0 0m) 
+*UpRightPanel: (Title "Tools", Action Popup Tools_apps Rectangle +$left+20 0 0m) 
+*UpRightPanel: (Title "Network", Action Popup Net_apps Rectangle +$left+20 0 0m) 
+*UpRightPanel: (Title "Graphx", Action Popup Gfx_apps Rectangle +$left+20 0 0m)
+*UpRightPanel: (Title "Music", Action Popup Mus_apps Rectangle +$left+20 0 0m)
+*UpRightPanel: (Title "Games", Action Popup Game_apps Rectangle +$left+20 0 0m)
+*UpRightPanel: (Size 16 Title " ")
+*UpRightPanel: (right, Frame 0, Swallow (UseOld, NoClose) "PanelClock" "Exec exec xclock -bg $[bg.cs20] -padding 2")
+*UpRightPanel: (right, Icon "titlebar_gadget.png" , Action WindowList $[winlist_ops])
+*UpRightPanel: (End)
+
+
+# check: Icon, IconOverride (pour mettre des icons custom) "they are Styles"
+# http://fvwm.org/documentation/manpages/fvwm.html#lbBV
+
+# check the options for WindowList, I thought there was one to make it popup differently
