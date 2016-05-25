@@ -337,8 +337,8 @@ DestroyModuleConfig FvwmIdent: *
 *TopPanel: (Title "Graphx", Action Popup Gfx_apps Rectangle +$left+20 0 0m)
 *TopPanel: (Title "Music", Action Popup Mus_apps Rectangle +$left+20 0 0m)
 *TopPanel: (Title "Games", Action Popup Game_apps Rectangle +$left+20 0 0m)
-*TopPanel: (Size 10 Title " ")
-*TopPanel: (Size 2 right, Frame 0, Swallow (UseOld, NoClose) "PanelClock" "Exec exec xclock -name PanelClock -strftime '%a %d %B - %H:%M' -digital -bg $[bg.cs20] -face \"Sans:weight=bold:size=8\" -padding 2")
+*TopPanel: (Size 12, Title " ")
+*TopPanel: (Size 2, right, Frame 0, Swallow (UseOld, NoClose) "PanelClock" "Exec exec xclock -name PanelClock -strftime '%a %d %B - %H:%M' -digital -bg $[bg.cs20] -face \"Sans:weight=bold:size=8\" -padding 2")
 *TopPanel: (right, Icon "titlebar_gadget.png" , Action WindowList $[winlist_ops])
 *TopPanel: (End)
 
