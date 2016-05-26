@@ -18,7 +18,7 @@ SetEnv winlist_ops "SortByClass OnTop NoGeometry NoCurrentDeskTitle NoNumInDeskT
 #============
 # Basic Setup
 #============
-ImagePath	$[icontheme]:/usr/share/icons:/usr/share/fvwm/images:/usr/X11R6/share/icons:/usr/X11R6/share/fvwm/images/
+ImagePath	$[icontheme]:/usr/share/icons:/home/nisip/.fvwm/icons
 
 DefaultFont "$[normal_font]"
 CursorStyle DEFAULT left_ptr
@@ -77,7 +77,7 @@ MenuStyle "*"			GreyedColorset 5
 # Styles applying to all windows
 Style "*"				IconSize 64 50 64 50, IconBackgroundColorset 5, IconBackgroundrelief 0, Icontitlerelief 0, HilightIconTitleColorset 2
 Style "*"				EWMHDonateIcon, EWMHDonateMiniIcon
-Style "*"				IconBox $[vp.width]x$[vp.height]+0-0, IconFill left bottom, IconSize 64 32 64 32
+Style "*"				IconBox $[vp.width]x$[vp.height]+0-0, IconFill left bottom, IconSize 64 40 64 40
 Style "*" 				TileCascadePlacement 
 Style "*"				Font $[normal_font]
 
@@ -101,7 +101,7 @@ Style "*"				HandleWidth 4
 # Default icon.
 #Style "*"				Icon "emblems/emblem-system.svg:48x48"
 #Style "*"				MiniIcon "emblems/emblem-system.svg:16x16"
-#Style "*"				!Button 2
+Style "*"				!Button 2
 #Style "*"				SnapAttraction 8 All
 
 # Styles for fvwm modules
@@ -112,13 +112,14 @@ Style "Ubutton"			Sticky, WindowListSkip, !Title, !Borders, !Handles, Layer 0
 Style "TopPanel"		Sticky, WindowListSkip, NeverFocus, !Title, !Borders, !Handles
 
 # Styles for a couple of common apps
-Style "Firefox"			Icon "gnome/32x32/apps/web-browser.png", IconOverride
-Style "Gnome-terminal"	Icon "gnome/32x32/apps/terminal.png", IconOverride
+Style "Firefox"			Icon "firefox.png", IconOverride
+Style "Gnome-terminal"	Icon "terminal.png", IconOverride
 Style "Transmission"	StartsOnDesk 0
-Style "Pidgin"			Icon "hicolor/32x32/apps/pidgin.png", IconOverride
-Style "Worker"			Icon "gnome/32x32/devices/system-floppy.png", MiniIcon "gnome/16x16/devices/system-floppy.png"
+Style "Pidgin"			Icon "jabber.png", IconOverride
+Style "Worker"			Icon "drawer.png", MiniIcon "drawer16.png"
 Style "Pcmanfm"			Icon "gnome/32x32/apps/kfm.png"
-Style "hexchat"			Icon "gnome-colors-common/32x32/apps/xchat-gnome.png", IconOverride
+Style "hexchat"			Icon "hexchat.png", IconOverride
+Style "geany"			Icon "editor.png", IconOverride
 
 #=========
 # Menus
