@@ -120,6 +120,7 @@ Style "Worker"			Icon "drawer.png", MiniIcon "drawer16.png"
 Style "Pcmanfm"			Icon "gnome/32x32/apps/kfm.png"
 Style "hexchat"			Icon "hexchat.png", IconOverride
 Style "geany"			Icon "editor.png", IconOverride
+Style "mpv"				Icon "video.png", IconOverride
 
 #=========
 # Menus
