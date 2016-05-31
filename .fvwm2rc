@@ -127,6 +127,7 @@ Style "geany"			Icon "editor.png", IconOverride
 
 DestroyMenu Tools_apps
 AddToMenu Tools_apps
++	"Audio control"			Exec exec "pavucontrol"
 +	"Terminal emu"			Exec exec "gnome-terminal"
 +	"File Manager"			Exec exec "worker"
 +	"Text Editor"			Exec exec "geany"
