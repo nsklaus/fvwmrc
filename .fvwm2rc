@@ -18,7 +18,7 @@ SetEnv winlist_ops "SortByClass OnTop NoGeometry NoCurrentDeskTitle NoNumInDeskT
 #============
 # Basic Setup
 #============
-ImagePath	$[icontheme]:/usr/share/icons:/home/nisip/.fvwm/icons
+ImagePath	$[icontheme]:/usr/share/icons:$[HOME]/.fvwm/icons
 
 DefaultFont "$[normal_font]"
 CursorStyle DEFAULT left_ptr
