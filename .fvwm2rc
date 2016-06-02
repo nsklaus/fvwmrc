@@ -26,6 +26,7 @@ CursorStyle MENU right_ptr
 CursorStyle TITLE left_ptr
 CursorStyle ROOT left_ptr
 HideGeometryWindow
+EwmhBaseStruts 0 0 20 70 # left right top bottom
 
 BugOpts RaiseOverUnmanaged
 BugOpts FlickeringMoveWorkaround
