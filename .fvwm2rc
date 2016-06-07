@@ -131,7 +131,7 @@ DestroyMenu Tools_apps
 AddToMenu Tools_apps
 +	"Audio control"			Exec exec "pavucontrol"
 +	"Terminal emu"			Exec exec "gnome-terminal"
-+	"File Manager"			Exec exec "worker"
++	"File Manager"			Exec exec pcmanfm --desktop
 +	"Text Editor"			Exec exec "geany"
 
 DestroyMenu Net_apps
@@ -152,7 +152,7 @@ AddToMenu Mus_apps
 
 DestroyMenu Game_apps
 AddToMenu Game_apps
-+	"Goban kgs"				Exec exec "java -jar ~/Downloads/cgoban.jar"
++	"Goban kgs"				Exec exec java -jar $[HOME]/Downloads/cgoban.jar
 
 DestroyMenu "Root"
 AddToMenu "Root"
