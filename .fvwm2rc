@@ -147,7 +147,7 @@ AddToMenu Gfx_apps
 
 DestroyMenu Mus_apps
 AddToMenu Mus_apps
-+	"MPV player"			Exec exec "$(mpv -quiet "`zenity --file-selection`")"
++	"MPV player"			Exec exec "$(mpv -quiet --force-window "`zenity --file-selection`")"
 +	"VideoLanClient"		Exec exec "vlc"
 
 DestroyMenu Game_apps
